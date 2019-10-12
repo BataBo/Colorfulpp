@@ -15,7 +15,7 @@ colorful::Write(a,color,middle);
 
 ```
 
-this function will write string a in color with specified above in a middle of the screen.1st and 2nd arguments are optional.
+this function will write string a in color with specified above in a middle of the screen.2nd and 3rd arguments are optional.
 This function also has WriteLine varient.
 
 ## Write string in multiple colors
@@ -52,4 +52,4 @@ colorful::WriteTitle("Text","Big.flf",RGB(25,25,25),Middle,false);
 
 ```
 
-This function will print first parameter in figlet font defined by second parameter it can be read from file like in example above but it can also be imported from a string if it is imported from string you'll have to change last parameter to true.
+This function will print first parameter in figlet font defined by second parameter it can be read from file like in example above but it can also be imported from a string if it is imported from string you'll have to change last parameter to true.3rd,4th and 5th arguments are optional.
