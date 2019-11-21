@@ -1,4 +1,3 @@
-#include "pch.h"
 #include <string>
 #include <regex>
 #include <iostream>
@@ -12,17 +11,16 @@
 #include <windows.h>
 
 
-using namespace std;
 
 namespace colorful {
 	struct FigletText {
 		std::string* text;
 		int textlenght;
 	};
-	vector<string> split(const string& s, char delim) {
-		vector<string> result;
-		stringstream ss(s);
-		string item;
+	std::vector<std::string> split(const std::string& s, char delim) {
+		std::vector<std::string> result;
+		std::stringstream ss(s);
+		std::string item;
 
 		while (getline(ss, item, delim)) {
 			result.push_back(item);
@@ -31,25 +29,25 @@ namespace colorful {
 		return result;
 	}
 
-	FigletText MakeFigletText(string text, string font) {
+	FigletText MakeFigletText(std::string text, std::string font) {
 
 		int i;
-		smatch match;
-		smatch match2;
-		regex e("flf2a\\$ (.+?) ");
-		regex e1("flf2a\\$ (.+?) (.+?) (.+?) (.+?) (.+?)(\r\n| )");
-		regex_search(font, match, e);
-		regex_search(font, match2, e1);
+		std::smatch match;
+		std::smatch match2;
+		std::regex e("flf2a\\$ (.+?) ");
+		std::regex e1("flf2a\\$ (.+?) (.+?) (.+?) (.+?) (.+?)(\r\n| )");
+		std::regex_search(font, match, e);
+		std::regex_search(font, match2, e1);
 		int FigletCharHeight = stoi(match[1]);
 		int  startingIndex = stoi(match2[5]) + 2;
-		string sfont = font;
+		std::string sfont = font;
 		int j = 0;
 		for (char c : sfont) {
 			sfont.erase(std::remove(sfont.begin(), sfont.end(), '\r'), sfont.end());
 		}
-		vector<string> FiFont = split(sfont, '\n');
-		string* dest = FiFont.data();
-		string* final = new string[FigletCharHeight];
+		std::vector<std::string> FiFont = split(sfont, '\n');
+		std::string* dest = FiFont.data();
+		std::string* final = new std::string[FigletCharHeight];
 		for (char c : text) {
 			int asciipos = (int)c - 32;
 			int figletspos = (startingIndex - 1) + FigletCharHeight * asciipos;
@@ -71,8 +69,8 @@ namespace colorful {
 		return rvalue;
 	}
 
-	FigletText MakeFigletTextFromFile(string text, string path) {
-		ifstream t(path);
+	FigletText MakeFigletTextFromFile(std::string text, std::string path) {
+		std::ifstream t(path);
 		std::string str((std::istreambuf_iterator<char>(t)),
 			std::istreambuf_iterator<char>());
 
@@ -305,7 +303,7 @@ namespace colorful {
 		}
 	}
 
-	void WriteTitle(string text, string PathorFont, COLORREF color = RGB(192, 192, 192), Alignment alignment = Right, bool isFont = false) {
+	void WriteTitle(std::string text, std::string PathorFont, COLORREF color = RGB(192, 192, 192), Alignment alignment = Right, bool isFont = false) {
 		if (isFont) {
 			FigletText a = MakeFigletText(text, PathorFont);
 			WriteTitle(a, color, alignment);
